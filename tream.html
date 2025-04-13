@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Rules & Policies | Epic Quest</title>
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --secondary: #9c27b0;
+            --accent: #e91e63;
+            --dark: #1a1a2e;
+            --light: #f8f8ff;
+            --neon: #00ff9d;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            margin: 0;
+            padding: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(106, 13, 173, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(233, 30, 99, 0.15) 0%, transparent 20%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            color: var(--neon);
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            font-weight: 800;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon), transparent);
+        }
+        
+        h2 {
+            color: var(--secondary);
+            font-size: 2rem;
+            margin-top: 40px;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+            text-shadow: 0 0 5px rgba(156, 39, 176, 0.3);
+        }
+        
+        h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        
+        p, li {
+            font-size: 1.1rem;
+        }
+        
+        a {
+            color: var(--neon);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        a:hover {
+            text-shadow: 0 0 5px var(--neon);
+        }
+        
+        .glow-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px var(--primary);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .glow-button:hover {
+            background: var(--secondary);
+            box-shadow: 0 0 20px var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .pixel-corner {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+        }
+        
+        .top-left {
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 0, 0% 100%, 100% 0);
+        }
+        
+        .top-right {
+            top: 0;
+            right: 0;
+            clip-path: polygon(100% 0, 0% 0%, 100% 100%);
+        }
+        
+        .bottom-left {
+            bottom: 0;
+            left: 0;
+            clip-path: polygon(0 100%, 0% 0%, 100% 100%);
+        }
+        
+        .bottom-right {
+            bottom: 0;
+            right: 0;
+            clip-path: polygon(100% 100%, 0% 100%, 100% 0);
+        }
+        
+        .scroll-indicator {
+            text-align: center;
+            margin-top: 50px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .section {
+            background: rgba(26, 26, 46, 0.7);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(106, 13, 173, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .section:hover {
+            box-shadow: 0 0 30px rgba(106, 13, 173, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--primary);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="pixel-corner top-left"></div>
+            <div class="pixel-corner top-right"></div>
+            <h1>EPIC QUEST</h1>
+            <p>Game Rules & Policies</p>
+            <div class="pixel-corner bottom-left"></div>
+            <div class="pixel-corner bottom-right"></div>
+        </header>
+        
+        <div class="scroll-indicator">
+            <p>▼ Scroll Down to Continue Your Quest ▼</p>
+        </div>
+        
+        <div class="section">
+            <h2>Terms of Service</h2>
+            <p>Welcome to Epic Quest! By entering this realm, you agree to abide by these rules. Failure to comply may result in penalties ranging from temporary suspension to permanent banishment from our kingdom.</p>
+            
+            <h3>1. Account Creation</h3>
+            <p>To begin your adventure, you must:</p>
+            <ul>
+                <li>Provide accurate registration information</li>
+                <li>Keep your login credentials secure</li>
+                <li>Not share or sell your account</li>
+                <li>Be at least 13 years old to play</li>
+            </ul>
+            
+            <h3>2. In-Game Conduct</h3>
+            <p>All players must follow the Code of Honor:</p>
+            <ul>
+                <li>No hacking, cheating, or exploiting bugs</li>
+                <li>Respect fellow adventurers - no harassment</li>
+                <li>No inappropriate usernames or guild names</li>
+                <li>Keep chat family-friendly</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Privacy Policy</h2>
+            <p>We value your privacy as much as you value your loot. Here's how we handle your information:</p>
+            
+            <h3>1. Data We Collect</h3>
+            <ul>
+                <li>Account information (email, username)</li>
+                <li>Game progress and statistics</li>
+                <li>Device information for optimization</li>
+                <li>Purchase history (for digital goods)</li>
+            </ul>
+            
+            <h3>2. How We Use Your Data</h3>
+            <ul>
+                <li>To provide and improve game services</li>
+                <li>For customer support</li>
+                <li>To prevent fraud and cheating</li>
+                <li>For analytics (anonymized where possible)</li>
+            </ul>
+            
+            <h3>3. Data Protection</h3>
+            <p>We implement strong security measures to protect your data from unauthorized access. However, no system is 100% secure - protect your account password!</p>
+        </div>
+        
+        <div class="section">
+            <h2>Refund Policy</h2>
+            <p>All purchases of in-game currency and items are final. However, we may issue refunds in exceptional circumstances at our discretion.</p>
+            
+            <h3>Subscription Services</h3>
+            <p>Premium memberships can be canceled at any time, but no refunds will be issued for the current billing period.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Game Rules</h2>
+            <p>To ensure fair play for all adventurers, these rules are strictly enforced:</p>
+            
+            <h3>1. Prohibited Actions</h3>
+            <ul>
+                <li>Using third-party software to gain advantage</li>
+                <li>Account sharing or boosting services</li>
+                <li>Real-money trading of in-game items</li>
+                <li>Exploiting bugs instead of reporting them</li>
+            </ul>
+            
+            <h3>2. Penalties</h3>
+            <p>Violations may result in:</p>
+            <ul>
+                <li>Temporary suspension (first offense)</li>
+                <li>Permanent ban (repeat offenses)</li>
+                <li>Removal of ill-gotten items/currency</li>
+                <li>Legal action for severe violations</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Contact Us</h2>
+            <p>Need help from the game masters?</p>
+            <p>Email: <a href="mailto:AbdulRehmanroyal532@gmail.com">AbdulRehmanroyal532@gmail.com</a></p>
+            <p>Customer service response time: 24-48 hours</p>
+            <p>For urgent matters, please include "URGENT" in your subject line.</p>
+            
+            <center>
+                <button class="glow-button">ACCEPT TERMS & BEGIN QUEST</button>
+            </center>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 Epic Quest Game Studios. All rights reserved.</p>
+        <p>Version 2.5.1 - Last updated: January 15, 2023</p>
+    </footer>
+</body>
+</html>

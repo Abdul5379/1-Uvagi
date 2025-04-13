@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UVAGI Game - Features</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #111827, #1f2937);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header styles */
+        header {
+            padding: 1rem 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.875rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            background: linear-gradient(to right, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a:hover {
+            color: #a78bfa;
+        }
+        
+        .nav-links a.active {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+        
+        .play-button {
+            display: none;
+            background-color: #9333ea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .play-button:hover {
+            background-color: #7e22ce;
+        }
+        
+        .mobile-menu-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Page header */
+        .page-header {
+            background: linear-gradient(to right, rgba(88, 28, 135, 0.3), rgba(157, 23, 77, 0.3));
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #d1d5db;
+            font-size: 1.125rem;
+        }
+        
+        /* Feature sections */
+        .feature-section {
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-section:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .feature-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #a78bfa;
+        }
+        
+        .feature-description {
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .feature-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li i {
+            color: #a78bfa;
+            margin-right: 0.75rem;
+        }
+        
+        .feature-image {
+            width: 100%;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Specs section */
+        .specs-section {
+            padding: 3rem 0;
+            background: linear-gradient(to right, rgba(88, 28, 135, 0.2), rgba(157, 23, 77, 0.2));
+            border-radius: 0.75rem;
+            margin: 2rem 0;
+        }
+        
+        .specs-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .spec-card {
+            background-color: rgba(17, 24, 39, 0.7);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .spec-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #a78bfa;
+        }
+        
+        .spec-description {
+            color: #d1d5db;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        /* CTA section */
+        .cta-section {
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-description {
+            color: #d1d5db;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .cta-button {
+            background-color: #9333ea;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0.375rem;
+            font-size: 1.125rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #7e22ce;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid #1f2937;
+            background-color: #111827;
+        }
+        
+        .footer-container {
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #a78bfa;
+        }
+        
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        /* Responsive styles */
+        @media (min-width: 640px) {
+            .specs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+            
+            .play-button {
+                display: block;
+            }
+            
+            .mobile-menu-button {
+                display: none;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+                align-items: center;
+            }
+            
+            .feature-section:nth-child(even) .feature-grid {
+                direction: rtl;
+            }
+            
+            .feature-section:nth-child(even) .feature-content {
+                direction: ltr;
+            }
+            
+            .specs-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-gamepad" style="color: #a78bfa; font-size: 2rem;"></i>
+                <span class="logo-text">UVAGI</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="features.html" class="active">Features</a>
+                <a href="community.html">Community</a>
+                <a href="support.html">Support</a>
+                <a href="game.html">Game</a>
+                <a href="contact.html" class="active">Contact</a>
+                <a href="tream.html">Teram</a>
+            </nav>
+            <button class="play-button">Play Now</button>
+            <button class="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Game Features</h1>
+                <p class="page-description">
+                    Discover the cutting-edge features that make UVAGI the most immersive and exciting gaming experience available today.
+                </p>
+            </div>
+        </section>
+        
+        <section class="feature-section">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <h2 class="feature-title">High-Performance Racing</h2>
+                        <p class="feature-description">
+                            Experience the thrill of high-speed racing with our state-of-the-art physics engine. Feel every turn, drift, and acceleration as you navigate through meticulously designed urban landscapes and challenging tracks.
+                        </p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Realistic physics and handling</li>
+                            <li><i class="fas fa-check-circle"></i> Over 50 customizable vehicles</li>
+                            <li><i class="fas fa-check-circle"></i> Dynamic weather and time-of-day effects</li>
+                            <li><i class="fas fa-check-circle"></i> Detailed damage modeling</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-I1Y5NzLD1vx2PNSXFAr0ICS182QwvW.png" alt="High-performance sports car in urban setting">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="feature-section">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <h2 class="feature-title">Immersive Open World</h2>
+                        <p class="feature-description">
+                            Explore a vast, living open world filled with activities, challenges, and hidden secrets. From bustling city centers to serene countryside, every corner of our world is crafted with attention to detail.
+                        </p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> 100+ square miles of explorable terrain</li>
+                            <li><i class="fas fa-check-circle"></i> Densely populated urban areas</li>
+                            <li><i class="fas fa-check-circle"></i> Dynamic NPC behaviors and interactions</li>
+                            <li><i class="fas fa-check-circle"></i> Destructible environments</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image">
+                        <img src="land.png" alt="Open world city landscape">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="feature-section">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <h2 class="feature-title">Multiplayer Experience</h2>
+                        <p class="feature-description">
+                            Connect with friends and rivals in our seamless multiplayer environment. Compete in races, team up for missions, or simply cruise around the city together in real-time.
+                        </p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Up to 100 players per server</li>
+                            <li><i class="fas fa-check-circle"></i> Competitive ranked matches</li>
+                            <li><i class="fas fa-check-circle"></i> Co-op mission system</li>
+                            <li><i class="fas fa-check-circle"></i> In-game voice chat and messaging</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image">
+                        <img src="cars.png" alt="Multiplayer racing scene">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="specs-section">
+            <div class="container">
+                <h2 class="specs-title">Technical Specifications</h2>
+                <div class="specs-grid">
+                    <div class="spec-card">
+                        <h3 class="spec-title">Minimum Requirements</h3>
+                        <div class="spec-description">
+                            <p><strong>OS:</strong> Windows 10 64-bit</p>
+                            <p><strong>Processor:</strong> Intel Core i5-4460 or AMD Ryzen 3 1200</p>
+                            <p><strong>Memory:</strong> 8 GB RAM</p>
+                            <p><strong>Graphics:</strong> NVIDIA GTX 1050 Ti or AMD RX 560</p>
+                            <p><strong>Storage:</strong> 75 GB available space</p>
+                            <p><strong>Network:</strong> Broadband Internet connection</p>
+                        </div>
+                    </div>
+                    <div class="spec-card">
+                        <h3 class="spec-title">Recommended Requirements</h3>
+                        <div class="spec-description">
+                            <p><strong>OS:</strong> Windows 10/11 64-bit</p>
+                            <p><strong>Processor:</strong> Intel Core i7-8700K or AMD Ryzen 5 3600X</p>
+                            <p><strong>Memory:</strong> 16 GB RAM</p>
+                            <p><strong>Graphics:</strong> NVIDIA RTX 3060 or AMD RX 6600 XT</p>
+                            <p><strong>Storage:</strong> 75 GB SSD</p>
+                            <p><strong>Network:</strong> Broadband Internet connection</p>
+                        </div>
+                    </div>
+                    <div class="spec-card">
+                        <h3 class="spec-title">Supported Platforms</h3>
+                        <div class="spec-description">
+                            <p><strong>PC:</strong> Windows 10/11</p>
+                            <p><strong>Console:</strong> PlayStation 5, Xbox Series X|S</p>
+                            <p><strong>Mobile:</strong> iOS and Android (Cloud Gaming)</p>
+                            <p><strong>VR:</strong> Compatible with major VR headsets</p>
+                            <p><strong>Controllers:</strong> Full controller support</p>
+                            <p><strong>Languages:</strong> Supports 15+ languages</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="cta-title">Ready to Experience UVAGI?</h2>
+                <p class="cta-description">
+                    Join millions of players already enjoying the ultimate gaming experience.
+                </p>
+                <button class="cta-button">Download Now</button>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <i class="fas fa-gamepad" style="color: #a78bfa;"></i>
+                <span class="footer-logo-text">UVAGI</span>
+            </div>
+            <div class="footer-links">
+                <a href="tream">Terms</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-copyright">© <span id="current-year"></span> UVAGI. All rights reserved.</div>
+        </div>
+    </footer>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                alert('Mobile menu clicked! Add your menu toggle functionality here.');
+            });
+        }
+        
+        // Play buttons functionality
+        const playButtons = document.querySelectorAll('.play-button');
+        
+        playButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Play Now clicked! Add your game launch functionality here.');
+            });
+        });
+        
+        // Download button functionality
+        const downloadButton = document.querySelector('.cta-button');
+        
+        if (downloadButton) {
+            downloadButton.addEventListener('click', function() {
+                alert('Download clicked! Add your download functionality here.');
+            });
+        }
+    </script>
+
+<script src="/2server.js"></script>
+
+</body>
+</html>

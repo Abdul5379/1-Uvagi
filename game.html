@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UVAGI - All Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #111827, #1f2937);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header styles */
+        header {
+            padding: 1rem 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.875rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            background: linear-gradient(to right, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a:hover {
+            color: #a78bfa;
+        }
+        
+        .nav-links a.active {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+        
+        .play-button {
+            display: none;
+            background-color: #9333ea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .play-button:hover {
+            background-color: #7e22ce;
+        }
+        
+        .mobile-menu-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Page header */
+        .page-header {
+            background: linear-gradient(to right, rgba(88, 28, 135, 0.3), rgba(157, 23, 77, 0.3));
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #d1d5db;
+            font-size: 1.125rem;
+        }
+        
+        /* Games grid */
+        .games-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        
+        .game-card {
+            width: 300px;
+            background-color: rgba(17, 24, 39, 0.7);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+        }
+        
+        .game-image-container {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .game-card:hover .game-image {
+            transform: scale(1.05);
+        }
+        
+        .game-content {
+            padding: 1.5rem;
+        }
+        
+        .game-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .game-description {
+            color: #d1d5db;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .game-link {
+            display: inline-block;
+            background-color: #9333ea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: background-color 0.3s;
+        }
+        
+        .game-link:hover {
+            background-color: #7e22ce;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid #1f2937;
+            background-color: #111827;
+        }
+        
+        .footer-container {
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #a78bfa;
+        }
+        
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        /* Responsive styles */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+            
+            .play-button {
+                display: block;
+            }
+            
+            .mobile-menu-button {
+                display: none;
+            }
+            
+            .footer-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container header-container">
+        <div class="logo">
+            <i class="fas fa-gamepad" style="color: #a78bfa; font-size: 2rem;"></i>
+            <span class="logo-text">UVAGI</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="features.html">Features</a>
+            <a href="community.html">Community</a>
+            <a href="support.html">Support</a>
+            <a href="games.html" class="active">Games</a>
+            <a href="contact.html" class="active">Contact</a>
+            <a href="tream.html">Terms</a>
+        </nav>
+        <button class="play-button">Play Now</button>
+        <button class="mobile-menu-button">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>
+
+<main>
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Our Game Collection</h1>
+            <p class="page-description">
+                Explore our extensive library of games across various genres. Click on any game to learn more and start playing.
+            </p>
+        </div>
+    </section>
+    
+    <section class="container">
+        <div class="games-grid">
+            <!-- Dragon Age: The Veilguard -->
+            <div class="game-card">
+                <a href="game-dragon-age.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-X4wSg1vAfnyAPcNOauXzcHwnt8o09b.png" alt="Dragon Age: The Veilguard" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">Dragon Age: The Veilguard</h3>
+                    <p class="game-description">
+                        Embark on an epic fantasy adventure in the latest installment of the Dragon Age series. Battle fearsome creatures, forge powerful alliances, and shape the fate of Thedas.
+                    </p>
+                    <a href="game-dragon-age.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- F1 24 -->
+            <div class="game-card">
+                <a href="game-f1-24.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-E1p6fj5LAYW8JuB8PDWGzZmcNYla4m.png" alt="F1 24" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">F1 24</h3>
+                    <p class="game-description">
+                        Experience the thrill of Formula 1 racing with the official F1 24 game. Race as your favorite drivers, customize your car, and compete in championships around the world.
+                    </p>
+                    <a href="game-f1-24.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Baldur's Gate 3 -->
+            <div class="game-card">
+                <a href="game-baldurs-gate.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-OPJpi53DHnXIDcEG5uXbfGlLDH9GXv.png" alt="Baldur's Gate 3" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">Baldur's Gate 3</h3>
+                    <p class="game-description">
+                        Dive into a world of fantasy and adventure in this critically acclaimed RPG. Create your character, gather your party, and explore the Forgotten Realms in this epic tale.
+                    </p>
+                    <a href="game-baldurs-gate.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Cyberpunk 2077 -->
+            <div class="game-card">
+                <a href="game-cyberpunk.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-fyLUpriZm801w9WCPHxe1MFDuCvZzN.png" alt="Cyberpunk 2077" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">Cyberpunk 2077</h3>
+                    <p class="game-description">
+                        Enter the dystopian future of Night City in this open-world action RPG. Customize your character, upgrade your cybernetic implants, and navigate a world of corporate intrigue.
+                    </p>
+                    <a href="game-cyberpunk.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Free Fire -->
+            <div class="game-card">
+                <a href="game-free-fire.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-XVmMAPsksBImYTT8i1xTRfbK1vZ6PN.png" alt="Free Fire" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">Free Fire</h3>
+                    <p class="game-description">
+                        Join the ultimate battle royale experience with Free Fire. Drop into the battlefield, gather weapons, and be the last one standing in this fast-paced multiplayer shooter.
+                    </p>
+                    <a href="game-free-fire.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Marvel Rivals -->
+            <div class="game-card">
+                <a href="game-marvel-rivals.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-c0loNFgyB7mnVnOgBHYtLxZN1Xp2Em.png" alt="Marvel Rivals" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">Marvel Rivals</h3>
+                    <p class="game-description">
+                        Assemble your team of Marvel heroes and villains in this action-packed multiplayer game. Master unique abilities, form strategic alliances, and dominate the battlefield.
+                    </p>
+                    <a href="game-marvel-rivals.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Warframe -->
+            <div class="game-card">
+                <a href="game-warframe.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LXfhFeMLBbb4msFOhnWuTD5FqTVzqK.png" alt="Warframe" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">Warframe</h3>
+                    <p class="game-description">
+                        Become a space ninja in this fast-paced cooperative action game. Master the art of the Warframe, customize your arsenal, and fight across the solar system with friends.
+                    </p>
+                    <a href="game-warframe.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Enshrouded -->
+            <div class="game-card">
+                <a href="game-enshrouded.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ch4nO0byQT1hdWvx4Xx9X6MCK9WOUq.png" alt="Enshrouded" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">Enshrouded</h3>
+                    <p class="game-description">
+                        Survive in a world covered by a deadly fog in this open-world survival crafting game. Build, fight, and explore as you uncover the mysteries of a fallen civilization.
+                    </p>
+                    <a href="game-enshrouded.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Hades -->
+            <div class="game-card">
+                <a href="game-hades.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-wSb12ShoQldOCJcScxOu8MLsJO9IfE.png" alt="Hades" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">Hades</h3>
+                    <p class="game-description">
+                        Battle your way out of the Underworld in this award-winning roguelike dungeon crawler. Wield mythical weapons, receive blessings from the gods, and defy your fate.
+                    </p>
+                    <a href="game-hades.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Rocket League -->
+            <div class="game-card">
+                <a href="game-rocket-league.html">
+                    <div class="game-image-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gyTsKvMe5QPdedbLS0cLc6EAFyDnJT.png" alt="Rocket League" class="game-image">
+                    </div>
+                </a>
+                <div class="game-content">
+                    <h3 class="game-title">Rocket League</h3>
+                    <p class="game-description">
+                        Experience soccer like never before with rocket-powered cars. Perform aerial stunts, score spectacular goals, and compete in high-octane matches in this unique sports game.
+                    </p>
+                    <a href="game-rocket-league.html" class="game-link">Play Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container footer-container">
+        <div class="footer-logo">
+            <i class="fas fa-gamepad" style="color: #a78bfa;"></i>
+            <span class="footer-logo-text">UVAGI</span>
+        </div>
+        <div class="footer-links">
+            <a href="tream">Terms</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-copyright">© <span id="current-year"></span> UVAGI. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Mobile menu toggle functionality
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', function() {
+            alert('Mobile menu clicked! Add your menu toggle functionality here.');
+        });
+    }
+    
+    // Play buttons functionality
+    const playButtons = document.querySelectorAll('.play-button');
+    
+    playButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            alert('Play Now clicked! Add your game launch functionality here.');
+        });
+    });
+</script>
+</body>
+</html>

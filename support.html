@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UVAGI Game - Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #111827, #1f2937);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header styles */
+        header {
+            padding: 1rem 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.875rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            background: linear-gradient(to right, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a:hover {
+            color: #a78bfa;
+        }
+        
+        .nav-links a.active {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+        
+        .play-button {
+            display: none;
+            background-color: #9333ea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .play-button:hover {
+            background-color: #7e22ce;
+        }
+        
+        .mobile-menu-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Page header */
+        .page-header {
+            background: linear-gradient(to right, rgba(88, 28, 135, 0.3), rgba(157, 23, 77, 0.3));
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #d1d5db;
+            font-size: 1.125rem;
+        }
+        
+        /* Support sections */
+        .support-section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .section-description {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-align: center;
+            color: #d1d5db;
+        }
+        
+        /* Quick help */
+        .quick-help-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .help-card {
+            background-color: rgba(17, 24, 39, 0.7);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .help-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .help-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(147, 51, 234, 0.2);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a78bfa;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .help-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .help-description {
+            color: #d1d5db;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .help-link {
+            color: #a78bfa;
+            text-decoration: none;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .help-link i {
+            margin-left: 0.5rem;
+        }
+        
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .faq-question {
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .faq-answer {
+            padding: 0 0 1rem;
+            color: #d1d5db;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+        
+        /* Contact form */
+        .contact-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            background-color: rgba(17, 24, 39, 0.7);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        
+        .contact-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item i {
+            width: 2rem;
+            color: #a78bfa;
+            margin-right: 0.5rem;
+        }
+        
+        .contact-text {
+            color: #d1d5db;
+        }
+        
+        .contact-form {
+            background-color: rgba(17, 24, 39, 0.7);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: #d1d5db;
+        }
+        
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.375rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+        }
+        
+        .form-button {
+            background-color: #9333ea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .form-button:hover {
+            background-color: #7e22ce;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid #1f2937;
+            background-color: #111827;
+        }
+        
+        .footer-container {
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #a78bfa;
+        }
+        
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        /* Responsive styles */
+        @media (min-width: 640px) {
+            .quick-help-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+            
+            .play-button {
+                display: block;
+            }
+            
+            .mobile-menu-button {
+                display: none;
+            }
+            
+            .quick-help-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+            
+            .footer-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-gamepad" style="color: #a78bfa; font-size: 2rem;"></i>
+                <span class="logo-text">UVAGI</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="features.html">Features</a>
+                <a href="community.html">Community</a>
+                <a href="support.html" class="active">Support</a>
+                <a href="game.html">Game</a>
+                <a href="contact.html" class="active">Contact</a>
+                <a href="tream.html">Tream</a>
+            </nav>
+            <button class="play-button">Play Now</button>
+            <button class="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Support Center</h1>
+                <p class="page-description">
+                    Need help with UVAGI? Our support team and resources are here to assist you with any issues or questions.
+                </p>
+            </div>
+        </section>
+        
+        <section class="support-section">
+            <div class="container">
+                <h2 class="section-title">Quick Help</h2>
+                <p class="section-description">
+                    Find solutions to common issues or get in touch with our support team.
+                </p>
+                
+                <div class="quick-help-grid">
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="help-title">Knowledge Base</h3>
+                        <p class="help-description">
+                            Browse our comprehensive guides and tutorials for answers to common questions.
+                        </p>
+                        <a href="#" class="help-link">
+                            Browse Articles <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h3 class="help-title">Downloads</h3>
+                        <p class="help-description">
+                            Download the latest game client, patches, and additional content.
+                        </p>
+                        <a href="#" class="help-link">
+                            View Downloads <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="help-title">Community Forums</h3>
+                        <p class="help-description">
+                            Get help from other players and share your knowledge with the community.
+                        </p>
+                        <a href="#" class="help-link">
+                            Visit Forums <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="help-title">Troubleshooting</h3>
+                        <p class="help-description">
+                            Step-by-step guides to resolve common technical issues and improve performance.
+                        </p>
+                        <a href="#" class="help-link">
+                            View Guides <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="help-title">Live Chat Support</h3>
+                        <p class="help-description">
+                            Connect with our support team in real-time for immediate assistance with urgent issues.
+                        </p>
+                        <a href="#" class="help-link">
+                            Start Chat <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <h3 class="help-title">Submit a Ticket</h3>
+                        <p class="help-description">
+                            Create a support ticket for issues that require more detailed investigation.
+                        </p>
+                        <a href="#" class="help-link">
+                            Open Ticket <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="support-section">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-description">
+                    Find quick answers to our most commonly asked questions.
+                </p>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What are the system requirements for UVAGI?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>UVAGI requires at minimum:</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: #d1d5db;">
+                                <li>OS: Windows 10 64-bit</li>
+                                <li>Processor: Intel Core i5-4460 or AMD Ryzen 3 1200</li>
+                                <li>Memory: 8 GB RAM</li>
+                                <li>Graphics: NVIDIA GTX 1050 Ti or AMD RX 560</li>
+                                <li>Storage: 75 GB available space</li>
+                                <li>Network: Broadband Internet connection</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;">For the best experience, we recommend:</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: #d1d5db;">
+                                <li>OS: Windows 10/11 64-bit</li>
+                                <li>Processor: Intel Core i7-8700K or AMD Ryzen 5 3600X</li>
+                                <li>Memory: 16 GB RAM</li>
+                                <li>Graphics: NVIDIA RTX 3060 or AMD RX 6600 XT</li>
+                                <li>Storage: 75 GB SSD</li>
+                                <li>Network: Broadband Internet connection</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I create an account?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To create a UVAGI account:</p>
+                            <ol style="margin-left: 1.5rem; margin-top: 0.5rem; color: #d1d5db;">
+                                <li>Visit our official website at www.uvagi.com</li>
+                                <li>Click on the "Sign Up" button in the top right corner</li>
+                                <li>Fill in your email address, username, and password</li>
+                                <li>Verify your email address by clicking the link sent to your inbox</li>
+                                <li>Complete your profile information</li>
+                                <li>Download the game client and log in with your new credentials</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Is UVAGI free to play?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>UVAGI offers both free and premium options:</p>
+                            <p style="margin-top: 0.5rem;">The base game is free to play with access to core features and gameplay. We offer a Premium Pass for $9.99/month that includes:</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: #d1d5db;">
+                                <li>Exclusive character customizations</li>
+                                <li>Bonus in-game currency</li>
+                                <li>Priority server access</li>
+                                <li>Early access to new content</li>
+                                <li>Ad-free experience</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;">We also offer cosmetic items and non-gameplay affecting items through our in-game store.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I report a bug or player?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To report a bug:</p>
+                            <ol style="margin-left: 1.5rem; margin-top: 0.5rem; color: #d1d5db;">
+                                <li>In-game, press ESC and select "Report Bug"</li>
+                                <li>Fill out the form with as much detail as possible</li>
+                                <li>Include screenshots or video if available</li>
+                                <li>Submit the report</li>
+                            </ol>
+                            <p style="margin-top: 0.5rem;">To report a player:</p>
+                            <ol style="margin-left: 1.5rem; margin-top: 0.5rem; color: #d1d5db;">
+                                <li>Click on the player's name in the game</li>
+                                <li>Select "Report Player" from the dropdown menu</li>
+                                <li>Choose the reason for reporting</li>
+                                <li>Provide additional details if necessary</li>
+                                <li>Submit the report</li>
+                            </ol>
+                            <p style="margin-top: 0.5rem;">Our moderation team reviews all reports and takes appropriate action according to our community guidelines.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I recover my password?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If you've forgotten your password:</p>
+                            <ol style="margin-left: 1.5rem; margin-top: 0.5rem; color: #d1d5db;">
+                                <li>Go to the login page at www.uvagi.com/login</li>
+                                <li>Click on "Forgot Password"</li>
+                                <li>Enter the email address associated with your account</li>
+                                <li>Check your email for a password reset link</li>
+                                <li>Click the link and follow the instructions to create a new password</li>
+                                <li>Log in with your new password</li>
+                            </ol>
+                            <p style="margin-top: 0.5rem;">If you don't receive the email, check your spam folder or contact our support team for assistance.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="#" style="display: inline-block; background-color: transparent; color: #a78bfa; border: 1px solid #a78bfa; padding: 0.75rem 1.5rem; border-radius: 0.375rem; text-decoration: none; font-weight: 500; transition: all 0.3s;">
+                        View All FAQs
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="support-section">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-description">
+                    Can't find what you're looking for? Get in touch with our support team.
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3 class="contact-title">Support Information</h3>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span class="contact-text">support@uvagi.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span class="contact-text">+1 (800) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span class="contact-text">24/7 Support</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="contact-text">UVAGI Headquarters<br>123 Gaming Street<br>San Francisco, CA 94103</span>
+                        </div>
+                        
+                        <div style="margin-top: 2rem;">
+                            <h4 style="margin-bottom: 1rem; font-size: 1rem;">Follow Us</h4>
+                            <div style="display: flex; gap: 1rem;">
+                                <a href="#" style="color: #a78bfa; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                                <a href="#" style="color: #a78bfa; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                                <a href="#" style="color: #a78bfa; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                                <a href="#" style="color: #a78bfa; font-size: 1.5rem;"><i class="fab fa-discord"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3 class="contact-title">Send Us a Message</h3>
+                        
+                        <form id="supportForm">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" id="name" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject</label>
+                                <select id="subject" class="form-select" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="technical">Technical Issue</option>
+                                    <option value="account">Account Problem</option>
+                                    <option value="billing">Billing Question</option>
+                                    <option value="feedback">Game Feedback</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea id="message" class="form-textarea" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" required style="margin-right: 0.5rem;">
+                                    I agree to the <a href="#" style="color: #a78bfa;">Privacy Policy</a>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="form-button">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <i class="fas fa-gamepad" style="color: #a78bfa;"></i>
+                <span class="footer-logo-text">UVAGI</span>
+            </div>
+            <div class="footer-links">
+                <a href="tream.html">Terms</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-copyright">© <span id="current-year"></span> UVAGI. All rights reserved.</div>
+        </div>
+    </footer>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                alert('Mobile menu clicked! Add your menu toggle functionality here.');
+            });
+        }
+        
+        // Play buttons functionality
+        const playButtons = document.querySelectorAll('.play-button');
+        
+        playButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Play Now clicked! Add your game launch functionality here.');
+            });
+        });
+        
+        // FAQ toggle functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle the clicked answer
+                if (!isActive) {
+                    answer.classList.add('active');
+                }
+                
+                // Update icons
+                document.querySelectorAll('.faq-question i').forEach(icon => {
+                    icon.className = 'fas fa-chevron-down';
+                });
+                
+                if (!isActive) {
+                    this.querySelector('i').className = 'fas fa-chevron-up';
+                }
+            });
+        });
+        
+        // Contact form functionality
+        const supportForm = document.getElementById('supportForm');
+        
+        if (supportForm) {
+            supportForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // Here you would typically send the form data to your server
+                console.log('Form submitted:', { name, email, subject, message });
+                
+                alert('Thank you for contacting us! Our support team will get back to you within 24 hours.');
+                
+                // Reset the form
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>

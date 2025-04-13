@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UVAGI Game - Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #111827, #1f2937);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header styles */
+        header {
+            padding: 1rem 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.875rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            background: linear-gradient(to right, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a:hover {
+            color: #a78bfa;
+        }
+        
+        .nav-links a.active {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+        
+        .play-button {
+            display: none;
+            background-color: #9333ea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .play-button:hover {
+            background-color: #7e22ce;
+        }
+        
+        .mobile-menu-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Page header */
+        .page-header {
+            background: linear-gradient(to right, rgba(88, 28, 135, 0.3), rgba(157, 23, 77, 0.3));
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #d1d5db;
+            font-size: 1.125rem;
+        }
+        
+        /* Community sections */
+        .community-section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .section-description {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-align: center;
+            color: #d1d5db;
+        }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background-color: rgba(17, 24, 39, 0.7);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #a78bfa;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #d1d5db;
+            font-size: 0.875rem;
+        }
+        
+        /* Events */
+        .events-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .event-card {
+            background-color: rgba(17, 24, 39, 0.7);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .event-content {
+            padding: 1.5rem;
+        }
+        
+        .event-date {
+            display: inline-block;
+            background-color: #9333ea;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .event-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-description {
+            color: #d1d5db;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .event-button {
+            display: inline-block;
+            background-color: transparent;
+            color: #a78bfa;
+            border: 1px solid #a78bfa;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .event-button:hover {
+            background-color: #a78bfa;
+            color: white;
+        }
+        
+        /* Forums */
+        .forums-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .forum-card {
+            background-color: rgba(17, 24, 39, 0.7);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .forum-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .forum-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(147, 51, 234, 0.2);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a78bfa;
+            font-size: 1.5rem;
+        }
+        
+        .forum-content {
+            flex: 1;
+        }
+        
+        .forum-title {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        
+        .forum-description {
+            color: #d1d5db;
+            font-size: 0.875rem;
+        }
+        
+        .forum-stats {
+            text-align: right;
+            color: #d1d5db;
+            font-size: 0.75rem;
+        }
+        
+        /* Social media */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .social-card {
+            background-color: rgba(17, 24, 39, 0.7);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .social-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-title {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .social-description {
+            color: #d1d5db;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-link {
+            display: inline-block;
+            background-color: #9333ea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: #7e22ce;
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            background: linear-gradient(to right, rgba(88, 28, 135, 0.2), rgba(157, 23, 77, 0.2));
+            border-radius: 0.75rem;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .newsletter-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-description {
+            color: #d1d5db;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .newsletter-button {
+            background-color: #9333ea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-button:hover {
+            background-color: #7e22ce;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid #1f2937;
+            background-color: #111827;
+        }
+        
+        .footer-container {
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #a78bfa;
+        }
+        
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        /* Responsive styles */
+        @media (min-width: 640px) {
+            .social-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .newsletter-form {
+                flex-direction: row;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+            
+            .play-button {
+                display: block;
+            }
+            
+            .mobile-menu-button {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .events-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .forums-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-gamepad" style="color: #a78bfa; font-size: 2rem;"></i>
+                <span class="logo-text">UVAGI</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="feature.html">Features</a>
+                <a href="community.html" class="active">Community</a>
+                <a href="support.html">Support</a>
+                <a href="game.html">Game</a>
+                <a href="contact.html" class="active">Contact</a>
+                <a href="tream.html">Tream</a>
+            </nav>
+            <button class="play-button">Play Now</button>
+            <button class="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Join Our Community</h1>
+                <p class="page-description">
+                    Connect with millions of UVAGI players worldwide. Share experiences, participate in events, and become part of our growing family.
+                </p>
+            </div>
+        </section>
+        
+        <section class="community-section">
+            <div class="container">
+                <h2 class="section-title">Community Stats</h2>
+                <p class="section-description">
+                    UVAGI has one of the most active gaming communities in the world.
+                </p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">Active Players</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Daily Forum Posts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Community Events Monthly</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5M+</div>
+                        <div class="stat-label">Social Media Followers</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="community-section">
+            <div class="container">
+                <h2 class="section-title">Upcoming Events</h2>
+                <p class="section-description">
+                    Join our regular tournaments, special events, and community gatherings.
+                </p>
+                
+                <div class="events-grid">
+                    <div class="event-card">
+                        <img src="/placeholder.svg?height=200&width=400" alt="Championship Tournament" class="event-image">
+                        <div class="event-content">
+                            <span class="event-date">May 15, 2025</span>
+                            <h3 class="event-title">UVAGI Championship Tournament</h3>
+                            <p class="event-description">
+                                Compete against the best players for a chance to win $100,000 in prizes.
+                            </p>
+                            <a href="#" class="event-button">Register Now</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="/placeholder.svg?height=200&width=400" alt="Community Meetup" class="event-image">
+                        <div class="event-content">
+                            <span class="event-date">June 5, 2025</span>
+                            <h3 class="event-title">Community Meetup - Los Angeles</h3>
+                            <p class="event-description">
+                                Meet fellow players and the development team in person at our LA event.
+                            </p>
+                            <a href="#" class="event-button">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="/placeholder.svg?height=200&width=400" alt="New Season Launch" class="event-image">
+                        <div class="event-content">
+                            <span class="event-date">July 1, 2025</span>
+                            <h3 class="event-title">Season 5 Launch Party</h3>
+                            <p class="event-description">
+                                Be the first to experience the new season with special in-game rewards.
+                            </p>
+                            <a href="#" class="event-button">Set Reminder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="community-section">
+            <div class="container">
+                <h2 class="section-title">Community Forums</h2>
+                <p class="section-description">
+                    Join discussions, share tips, and connect with other players on our forums.
+                </p>
+                
+                <div class="forums-grid">
+                    <div class="forum-card">
+                        <div class="forum-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="forum-content">
+                            <h3 class="forum-title">Announcements</h3>
+                            <p class="forum-description">Official news and updates from the UVAGI team.</p>
+                        </div>
+                        <div class="forum-stats">
+                            <p>150 threads</p>
+                            <p>1.2k posts</p>
+                        </div>
+                    </div>
+                    <div class="forum-card">
+                        <div class="forum-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="forum-content">
+                            <h3 class="forum-title">Tips & Strategies</h3>
+                            <p class="forum-description">Share your best gameplay tips and learn from others.</p>
+                        </div>
+                        <div class="forum-stats">
+                            <p>3.5k threads</p>
+                            <p>42k posts</p>
+                        </div>
+                    </div>
+                    <div class="forum-card">
+                        <div class="forum-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <div class="forum-content">
+                            <h3 class="forum-title">Technical Support</h3>
+                            <p class="forum-description">Get help with technical issues from our community.</p>
+                        </div>
+                        <div class="forum-stats">
+                            <p>2.1k threads</p>
+                            <p>15k posts</p>
+                        </div>
+                    </div>
+                    <div class="forum-card">
+                        <div class="forum-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="forum-content">
+                            <h3 class="forum-title">Find a Team</h3>
+                            <p class="forum-description">Looking for teammates? Find your perfect squad here.</p>
+                        </div>
+                        <div class="forum-stats">
+                            <p>4.7k threads</p>
+                            <p>28k posts</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 2rem;">
+                    <a href="#" style="display: inline-block; background-color: #9333ea; color: white; padding: 0.75rem 1.5rem; border-radius: 0.375rem; text-decoration: none; font-weight: 500; transition: background-color 0.3s;">
+                        Visit Forums
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="community-section">
+            <div class="container">
+                <h2 class="section-title">Connect With Us</h2>
+                <p class="section-description">
+                    Follow UVAGI on social media to stay updated with the latest news and connect with other players.
+                </p>
+                
+                <div class="social-grid">
+                    <div class="social-card">
+                        <div class="social-icon" style="color: #1DA1F2;">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                        <h3 class="social-title">Twitter</h3>
+                        <p class="social-description">
+                            Get the latest updates and join conversations about UVAGI.
+                        </p>
+                        <a href="https://youtube.com/@abdulrehmangraphic?si=DYqYAUywgO7teSTH" class="social-link">Follow Us</a>
+                    </div>
+                    <div class="social-card">
+                        <div class="social-icon" style="color: #FF0000;">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <h3 class="social-title">YouTube</h3>
+                        <p class="social-description">
+                            Watch gameplay videos, tutorials, and developer updates.
+                        </p>
+                        <a href="https://youtube.com/@abdulrehmangraphic?si=DYqYAUywgO7teSTH" class="social-link">Subscribe</a>
+                    </div>
+                    <div class="social-card">
+                        <div class="social-icon" style="color: #7289DA;">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <h3 class="social-title">Discord</h3>
+                        <p class="social-description">
+                            Join our Discord server to chat with other players in real-time.
+                        </p>
+                        <a href="https://youtube.com/@abdulrehmangraphic?si=DYqYAUywgO7teSTH" class="social-link">Join Server</a>
+                    </div>
+                    <div class="social-card">
+                        <div class="social-icon" style="color: #6441A4;">
+                            <i class="fab fa-twitch"></i>
+                        </div>
+                        <h3 class="social-title">Twitch</h3>
+                        <p class="social-description">
+                            Watch live streams from our team and community streamers.
+                        </p>
+                        <a href="https://youtube.com/@abdulrehmangraphic?si=DYqYAUywgO7teSTH" class="social-link">Follow Channel</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="newsletter-section">
+            <div class="container">
+                <h2 class="newsletter-title">Stay Updated</h2>
+                <p class="newsletter-description">
+                    Subscribe to our newsletter to receive the latest news, updates, and exclusive offers directly to your inbox.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <i class="fas fa-gamepad" style="color: #a78bfa;"></i>
+                <span class="footer-logo-text">UVAGI</span>
+            </div>
+            <div class="footer-links">
+                <a href="tream.html">Terms</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-copyright">© <span id="current-year"></span> UVAGI. All rights reserved.</div>
+        </div>
+    </footer>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                alert('Mobile menu clicked! Add your menu toggle functionality here.');
+            });
+        }
+        
+        // Play buttons functionality
+        const playButtons = document.querySelectorAll('.play-button');
+        
+        playButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Play Now clicked! Add your game launch functionality here.');
+            });
+        });
+        
+        // Newsletter form functionality
+        const newsletterForm = document.querySelector('.newsletter-form');
+        
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                alert(`Thank you for subscribing with ${emailInput.value}! You'll receive our updates soon.`);
+                emailInput.value = '';
+            });
+        }
+    </script>
+
+<script src="/3server.js"></script>
+
+
+
+</body>
+</html>
